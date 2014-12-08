@@ -1,0 +1,182 @@
+/* PaB Shop */
+#Anzahl {
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:30px;
+	height:20px
+}
+#Vorname {
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#Nachname {
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#Adresse {
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:308px;
+	height:20px
+}
+#PLZ {
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:40px;
+	height:20px
+}
+#Ort {
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:260px;
+	height:20px
+}
+#Telefon {
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#A_Name	{
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#A_Nummer	{
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#B_Name	{
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#B_Nummer	{
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#C_Name	{
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#C_Nummer	{
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#D_Name	{
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#D_Nummer	{
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#E_Notfallname	{
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#E_Notfallnummer	{
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#SOS_Taste_Name	{
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#SOS_Taste_Nummer	{
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#393636;
+	border:thin;
+	width:150px;
+	height:20px
+}
+#E_Mail	{
+	background-color:#d2a790;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	color:#393636;
+	border:thin;
+	width:300px;
+	height:25px
+
+}

@@ -1,0 +1,11 @@
+# -FrontPage-
+
+Options None
+
+<Limit GET POST PUT DELETE>
+order deny,allow
+deny from all
+</Limit>
+AuthName praxisambahnhof.ch
+AuthUserFile /home/web020/public_html/_vti_pvt/service.pwd
+AuthGroupFile /home/web020/public_html/_vti_pvt/service.grp

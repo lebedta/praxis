@@ -1,0 +1,635 @@
+<?php
+
+/**
+ * Create doctor biography
+ *
+ * @param $edit
+ * @param $account
+ * @param $category
+ */
+function praxis_doctors_user_insert(&$edit, $account, $category) {
+//    if (isset($account->roles[4])){
+//        $bio = entity_create('node', array('type' => 'doctor_biography', 'uid' => $account->uid, 'status' => 0, 'language' => 'en'));
+//        $ewrapper = entity_metadata_wrapper('node', $bio);
+//        $ewrapper->field_email->set($account->mail);
+//        $ewrapper->save(true);
+//        entity_save('node', $bio);
+//    }
+}
+
+//add font to tinyMCE editor
+function praxis_doctors_wysiwyg_editor_settings_alter(&$settings, $context) {
+    if ($context['profile']->editor == 'tinymce') {
+        $font_styles = array(
+            "Headers font (Lato)=Lato",
+            "Andale Mono=andale mono,times",
+            "Architects Daughter=architects_daughterregular",
+            "Arial=arial,helvetica,sans-serif",
+            "Arial Black=arial black,avant garde",
+            "Book Antiqua=book antiqua,palatino",
+            "Courier New=courier new,courier",
+            "Georgia=georgia,palatino",
+            "Helvetica=helvetica",
+            "Impact=impact,chicago",
+            "Symbol=symbol",
+            "Tahoma=tahoma,arial,helvetica,sans-serif",
+            "Terminal=terminal,monaco",
+            "Times New Roman=times new roman,times",
+            "Trebuchet MS=trebuchet ms,geneva",
+            "Verdana=verdana,geneva",
+            "Webdings=webdings",
+            "Wingdings=wingdings,zapf dingbats",
+        );
+        $settings['theme_advanced_fonts'] = implode(';', $font_styles);
+        $settings['content_css'] .= ',' . drupal_get_path('module', 'praxis_doctors') . '/additional_fonts.css';
+    }
+}
+
+function praxis_doctors_user_login(&$edit, $account){
+//    if ($account->access == "0" and isset($account->roles[4])){
+    if (isset($account->roles[4])){
+
+        if (count($account->field_biografy)>0)
+        {
+            $edit['redirect'] = 'node/'.$account->field_biografy['und'][0]['value'].'/edit';
+        }
+        else{
+            $edit['redirect'] = '/';
+        }
+    }
+    elseif(!isset($account->roles[5])){
+        $edit['redirect'] = '/';
+    }
+}
+
+function praxis_doctors_form_alter(&$form, &$form_state, $form_id){
+    global $user;
+
+    if ($form_id == 'doctor_biography_node_form' and (isset($user->roles[4]) || in_array('administrator', array_values($user->roles)) || in_array('Super admin', array_values($user->roles)))){
+        $form['actions']['submit']['#submit'][] = 'praxis_doctor_biografy_form_submit_alter';
+    }
+
+    if ($form_id == 'doctor_page_node_form' and (isset($user->roles[4]) || in_array('administrator', array_values($user->roles)) || in_array('Super admin', array_values($user->roles)))){
+        $form['actions']['submit']['#submit'][] = 'praxis_doctor_page_form_submit_alter';
+
+        if(!isset($_GET['nid'])) {
+            $biografy_page = $form['#entity']->field_biografy_page;
+            $doctor = $biografy_page['und'][0]['value'];
+        }
+        else{
+            $doctor = $_GET['nid'];
+        }
+
+        $form['field_biografy_page'] = array(
+            '#type' => 'hidden',
+            '#value' => $doctor,
+            '#default_value' => $doctor,
+            '#language' => 'und'
+        );
+    }
+    if ($form_id == 'news_node_form'){
+        $form['actions']['submit']['#submit'][] = 'praxis_doctor_news_form_submit_alter';
+    }
+    if ($form_id == 'downloads_node_form'){
+        $form['actions']['submit']['#submit'][] = 'praxis_doctor_downloads_form_submit_alter';
+    }
+    if ($form_id == 'user_register_form') {
+        $form['account']['notify']['#default_value'] = TRUE;
+    }
+    if ($form_id == 'internal_info_system_node_form'){
+        $form['actions']['submit']['#submit'][] = 'praxis_doctor_internal_info_system_form_submit_alter';
+    }
+}
+
+function praxis_doctor_downloads_form_submit_alter($form, &$form_state){
+    $form_state['redirect'] = '/';
+}
+
+function praxis_doctor_biografy_form_submit_alter($form, &$form_state){
+    global $language;
+
+    $entity_id = $form_state['node']->nid;
+
+    $slug = slug($form_state['node']->title);
+    $baseSlug = $slug;
+
+    $i=1;
+    while(create_doctor_slug($slug, $entity_id , 0)){
+        $slug = $baseSlug . "-" . $i++;
+    }
+    $form_state['node']->field_slug['und'][0]['value'] = $slug;
+
+    $doctor = node_load($entity_id);
+    $form_state['redirect'] = 'team/doctors/'.getDoctorSlug($doctor);
+    //TODO remove field_biografy for all user who use this biography at this moment
+
+    $uid = 0;
+    // if we select user for biography then we set this user biography id
+    if (count($form_state['node']->field_user)>0 && count($form_state['node']->field_user['und'])>0){
+        $uid = $form_state['node']->field_user['und'][0]['uid'];
+        $user = user_load($uid);
+        $edit = array(
+            'field_biografy' => array(
+                'und' => array(
+                    array(
+                        'value' => $form_state['node']->nid
+                    )
+                )
+            )
+        );
+        user_save($user, $edit);
+    }
+    if (count($form_state['node']->field_in_charge)>0 && count($form_state['node']->field_in_charge['und'])>0 && $form_state['node']->field_in_charge['und'][0]['value'] == 1){
+        $query = new EntityFieldQuery();
+        $entities = $query->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'doctor_biography')
+            ->fieldCondition('field_in_charge','value', 1, '=')
+            ->fieldCondition('field_main_subject', 'nid', $form_state['node']->field_main_subject['und'][0]['nid'], '=')
+            ->execute();
+        foreach($entities['node'] as $key => $entity){
+            if ($key != $form_state['node']->nid){
+                $node = node_load($key);
+                $node->field_in_charge['und'][0]['value'] = 0;
+                node_save($node);
+            }
+        }
+    }
+    $node = $form_state['node'];
+    $node->uid = $uid;
+    node_save($node);
+}
+
+function praxis_doctor_page_form_submit_alter($form, &$form_state){
+    global $language;
+    global $user;
+
+    $nid = $form['field_biografy_page']['#value'];
+    $entity_id = $form_state['node']->nid;
+
+    $slug = slug($form_state['node']->title);
+    $baseSlug = $slug;
+    $i=1;
+    while(create_doctor_page_slug($slug, $nid, $entity_id , 0)){
+        $slug = $baseSlug . "-" . $i++;
+    }
+
+
+    $form_state['node']->field_slug['und'][0]['value'] = $slug;
+
+    //echo $slug; die();
+    $node = $form_state['node'];
+    $doctor = node_load($nid);
+    $node->uid = $doctor->uid;
+    $node->field_biografy_page = array(
+        'und' => array(
+            0 => array(
+                'value' => $nid
+            )
+        )
+    );
+    node_save($node);
+    $form_state['redirect'] = 'team/doctors/'.getDoctorSlug($doctor).'/page/'.getDoctorPageSlug($node);
+}
+
+function praxis_doctor_internal_info_system_form_submit_alter($form, &$form_state){
+
+    $form_state['redirect'] = array('team/doctors', array('fragment' => 'block-views-internal-block-1'));
+}
+
+function praxis_doctor_news_form_submit_alter($form, &$form_state){
+    $form_state['redirect'] = 'admin/content';
+}
+
+function praxis_doctors_menu() {
+    $items['team/doctors'] = array(
+        'title' => 'Doctors',
+        'page callback' => 'team_view',
+        'page arguments' => array(1),
+        'access arguments' => array('access content'),
+        'file' => 'pages.inc'
+    );
+    $items['team/therapists'] = array(
+        'page callback' => 'team_view',
+        'page arguments' => array(1),
+        'access arguments' => array('access content'),
+        'file' => 'pages.inc'
+    );
+    $items['team/staff'] = array(
+        'page callback' => 'team_view',
+        'page arguments' => array(1),
+        'access arguments' => array('access content'),
+        'file' => 'pages.inc'
+    );
+    $items['team/%/%slug'] = array(
+        'title callback' => 'single_doctor_title',
+        'title arguments' => array(2),
+        'page callback' => 'doctor_view',
+        'page arguments' => array(2),
+        'access arguments' => array('access content'),
+        'file' => 'pages.inc'
+    );
+    $items['team/%/%slug/page/%'] = array(
+        'title callback' => 'single_doctor_page_title',
+        'title arguments' => array(2, 4),
+        'page callback' => 'doctor_view_page',
+        'page arguments' => array(2, 4),
+        'access arguments' => array('access content'),
+        'file' => 'pages.inc'
+    );
+    return $items;
+}
+
+function slug_load($slug){
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'doctor_biography')
+        ->propertyCondition('status', 1)
+        ->fieldCondition('field_slug', 'value', $slug, '=')
+        ->range(0, 10);
+    $result = $query->execute();
+    if (isset($result['node']) && count($result['node'])>0){
+        $val = array_values($result['node']);
+        return $val[0]->nid;
+    }
+    else{
+        return false;
+    }
+}
+
+function single_doctor_title($id){
+    global $language;
+
+    $doctor = node_load($id);
+    $items = field_get_items('node', $doctor, 'title_field');
+    $name = field_view_value('node', $doctor, 'title_field', $items[0], array(), $language->language);
+    return $name['#markup'];
+}
+
+function single_doctor_page_title($id, $page_id){
+    global $language;
+
+    $doctor = node_load($id);
+    $items = field_get_items('node', $doctor, 'title_field');
+    $name = field_view_value('node', $doctor, 'title_field', $items[0], array(), $language->language);
+    return $name['#markup'];
+}
+
+function praxis_doctors_user_update(&$edit, $account, $category) {
+
+}
+
+/**
+ * Implements hook_block_info().
+ *
+ * This hook declares what blocks are provided by the module.
+ */
+function praxis_doctors_block_info() {
+    $blocks['home_doctors'] = array(
+        'info' => t('Home doctors')
+    );
+    $blocks['specializations'] = array(
+        'info' => t('Specialties Block')
+    );
+    $blocks['home_specializations'] = array(
+        'info' => t('Home page Specialties Block')
+    );
+    $blocks['address_block'] = array(
+        'info' => t('Address Block with accordeon')
+    );
+    return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * This hook generates the contents of the blocks themselves.
+ */
+function praxis_doctors_block_view($delta = '') {
+    // The $delta parameter tells us which block is being requested.
+    switch ($delta) {
+        case 'home_doctors':
+            // The subject is displayed at the top of the block. Note that it
+            // should be passed through t() for translation. The title configured
+            // for the block using Drupal UI supercedes this one.
+            $block['subject'] = t('Willkommen in der Walk-In Praxis am Bahnhof Rüti, die Praxis für Allgemeine Medizin und Fachgebiete!');
+            // The content of the block is typically generated by calling a custom
+            // function.
+            $block['content'] = praxis_doctors_home_doctors_contents($delta);
+            break;
+        case 'specializations':
+            $block['content'] = praxis_doctors_block_specializations();
+            break;
+        case 'home_specializations':
+            $block['content'] = praxis_doctors_block_specializations();
+            break;
+        case 'address_block':
+            $block['content'] = praxis_doctors_block_address();
+            break;
+    }
+    return $block;
+}
+
+function praxis_doctors_home_doctors_contents(){
+    global $language;
+    $nodes = node_load_multiple(array(), array('type' => 'doctor_biography', 'status' => 1));
+//    debug($nodes);
+    $data = array();
+    $i = 0;
+
+    foreach($nodes as $bio){
+        if ($i == 0){
+            $slide = array();
+        }
+        $slide[] = $bio;
+        if ($i == 7){
+            $data[] = $slide;
+            $i = 0;
+        }
+        else{
+            $i++;
+        }
+    }
+    if ($i<9 && count($slide) >0){
+        $data[] = $slide;
+    }
+
+    drupal_add_js(drupal_get_path('module', 'praxis_doctors') . '/js/jquery.slides.js');
+    $build['myelement'] = array(
+        '#theme' => 'doctors_block',
+        '#doctors' => $data,
+    );
+    $output = theme('doctors_home_block', array('doctors' => $data, 'lang' => $language->language));
+    return $output;
+}
+
+function praxis_doctors_block_specializations(){
+    global $language;
+    $terms = i18n_taxonomy_localize_terms(taxonomy_get_tree(2, 0, null, true));
+    return theme('specialization_block', array('terms' => $terms, 'lang' => $language->language));
+
+}
+
+function praxis_doctors_theme() {
+    global $language;
+    return array(
+        'doctors_home_block' => array(
+            'template' => 'doctors',
+            'variables' => array('doctors' => array(), 'lang' => $language->language),
+        ),
+        'doctors_page' => array(
+            'template' => 'doctors_page',
+            'variables' => array(
+                'data' => array(),
+                'terms' => array(),
+                'image_field' => '',
+                'is_staff' => false,
+                'lang' => $language->language
+            ),
+        ),
+        'specialization_block' => array(
+            'template' => 'specialization_block',
+            'variables' => array('terms' => array(), 'lang' => $language->language),
+        ),
+        'single_doctor_page' => array(
+            'template' => 'single_doctor_page',
+            'variables' => array(
+                'doctor' => array(),
+                'pages' => array(),
+                'lang' => $language->language,
+                'user' => null,
+                'page' => null
+            ),
+        ),
+        'address_block' => array(
+            'template' => 'address_block',
+            'variables' => array(
+                'data' => array(),
+                'terms' => array(),
+                'lang' => $language->language
+            )
+        )
+    );
+}
+
+function praxis_doctors_block_address(){
+    global $language;
+
+    $specialities = node_load_multiple(array(), array('type' => 'specialties_page', 'status' => 1));
+    $arr = array();
+    foreach($specialities as $speciality){
+        $arr[$speciality->nid] = isset($speciality->title_field[$language->language]) ? $speciality->title_field[$language->language][0]['value'] : $speciality->title;
+    }
+    $arr[''] = 'Uncategorized';
+    $arr['a'] = t('Generic. addresses');//t('Allg. Adressen');
+    $arr['l'] = $language->language == 'en' ? 'Management' : 'Leitung';//t('Leitung'); 39
+    $arr['s'] = t('Secretariat');//t('Sekretariat'); 44
+
+
+
+    $nodes = node_load_multiple(array(), array('type' => 'doctor_biography', 'status' => 1));
+    $i =0;
+    foreach ($nodes as $node){
+        $f = false;
+            if ($item = field_get_items('node', $node, 'field_main_subject')){
+                $subject_id = $item[0]['nid'];
+                if (!isset($res[$subject_id])){
+                    $js[slug($arr[$subject_id])] = $i;
+                    $i++;
+                    $res[$subject_id] = array();
+                }
+                if (!in_array($node, $res[$subject_id])){
+                    $res[$subject_id][] = $node;
+                }
+
+            }
+            else{
+                $f = true;
+            }
+            //show doctors by they other subjects
+            if ($f){
+                $res[''][] = $node;
+            }
+    }
+
+    $res['a'] = array(
+        array('title' => t('General address'), 'email' => 'praxis@praxisambahnhof.ch'), //Hauptadresse
+        array('title' => t('Secretariat'), 'email' => 'sekretariat@praxisambahnhof.ch'), //Sekretariat
+        array('title' => t('Administration'), 'email' => 'administration@praxisambahnhof.ch'),
+    );
+
+//    print "<pre>";
+//    print_r($arr);
+//    print "</pre>";
+
+
+    $stuff = node_load_multiple(array(), array('type' => 'team_staff', 'status' => 1));
+    foreach($stuff as $item){
+//        print "<pre>";
+//        print_r($item);
+//        print "</pre>";
+//        break;
+        if ($item->field_category['und'][0]['tid'] == 39 || $item->field_category['und'][0]['tid'] == 40){
+            $key = 'l';
+        }
+        elseif ($item->field_category['und'][0]['tid'] == 44 || $item->field_category['und'][0]['tid'] == 43){
+            $key = 's';
+        }
+        else{
+            continue;
+        }
+        if (!isset($res[$key])){
+            $res[$key] = array();
+        }
+        $items = field_get_items('node', $item, 'title_field');
+        $value = field_view_value('node', $item, 'title_field', $items[0], array(), $language->language);
+        $name = render($value);
+        $name_parts = explode(' ', $name);
+        $res[$key][] = array(
+            'title' => $name,
+            'email' => $name_parts[count($name_parts)-1] . '@praxisambahnhof.ch'
+        );
+
+    }
+
+
+    $some_data = array();
+    foreach($arr as $key=>$value){
+        if ($key == 'a')
+        {
+            $some_data[$key] = "1111";
+        }
+        elseif($key == 'l'){
+            $some_data[$key] = "222222";
+        }
+        elseif($key == 's'){
+            $some_data[$key] = "333333";
+        }
+        else
+        $some_data[$key] = $value;
+    }
+    $GLOBALS['some_data'] = $some_data;
+    uksort($res, "cmp_items");
+
+//    print "<pre>";
+//    print_r($res);
+//    print "</pre>";
+
+
+
+
+    drupal_add_js(array('ids' => $js), 'setting');
+    drupal_add_js('/misc/ui/jquery.ui.core.min.js');
+    drupal_add_js('/misc/ui/jquery.ui.widget.min.js');
+    drupal_add_js('/misc/ui/jquery.ui.accordion.min.js');
+    drupal_add_css('/misc/ui/jquery.ui.core.css');
+    drupal_add_css('/misc/ui/jquery.ui.accordion.css');
+    $output = theme('address_block', array(
+        'data' => $res,
+        'terms' => $arr,
+        'lang' => $language->language));
+    return $output;
+}
+
+function cmp_items($a, $b){
+    $stuff_weights = array(
+        '' => 10,
+        40 => 0,
+        38 => 1,
+        42 => 2,
+        43 => 3,
+        39 => 0,
+        37 => 1,
+        41 => 2,
+        44 => 3,
+        'a' => 0,
+        'l' => 1,
+        's' => 2
+    );
+    if (!isset($GLOBALS['some_data'])) return 0;
+    if (isset($GLOBALS['page_type']) && $GLOBALS['page_type'] == 'staff'){
+        return $stuff_weights[$a] >= $stuff_weights[$b] ? 1 : -1;
+    }
+    else{
+        return $GLOBALS['some_data'][$a] >= $GLOBALS['some_data'][$b] ? 1 : -1;
+    }
+}
+
+
+function slug($str){
+    $str = str_replace('.','',$str);
+    return str_replace(' ', '-',str_replace('/', '', strtolower($str)));
+}
+
+function praxis_doctors_views_query_alter(&$view, &$query) {
+    // (Example assuming a view with an exposed filter on node title.)
+    // If the input for the title filter is a positive integer, filter against
+    // node ID instead of node title.
+
+//    print($view->name . "\n");
+
+    global $language;
+
+    if ($view->name == 'specialties_view') {
+        // Traverse through the 'where' part of the query.
+        foreach ($query->where as &$condition_group) {
+            $condition_group['conditions'][] = array(
+                'field' => 'field_data_title_field.language',
+                'value' => $language->language,
+                'operator' => '='
+            );
+        }
+    }
+}
+
+function getDoctorSlug($doctor){
+    return $doctor->field_slug['und'][0]['value'];
+}
+
+function getDoctorPageSlug($page){
+    return @$page->field_slug['und'][0]['value'];
+}
+
+function getDoctorType($doctor){
+    if ($doctor->field_type['und'][0]['value'] == "Arzte"){
+        $t = "doctors";
+    }
+    else{
+        $t = "therapists";
+    }
+    return $t;
+}
+
+function create_doctor_page_slug($slug, $nid, $entity_id, $k=0) {
+    $query = new EntityFieldQuery();
+    $query = new EntityFieldQuery();
+
+    $entities = $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'doctor_page')
+        ->fieldCondition('field_biografy_page','value', $nid, '=')
+        ->fieldCondition('field_slug','value', $slug, '=');
+
+    $result = $query->execute();
+    //echo '<pre>'; print_r($result); echo '</pre>'; die();
+    if (count($result) > 0 && !isset($result['node'][$entity_id])){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function create_doctor_slug($slug, $entity_id, $k=0) {
+    $query = new EntityFieldQuery();
+    $entities = $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'doctor_page')
+        ->fieldCondition('field_slug','value', $slug, '=');
+
+    $result = $query->execute();
+
+    if (count($result) > 0 && !isset($result['node'][$entity_id])){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
