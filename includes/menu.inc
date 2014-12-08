@@ -780,7 +780,7 @@ function _menu_translate(&$router_item, $map, $to_arg = FALSE) {
       $tab_root_map[$i] = $path_map[$i];
     }
     if (isset($tab_parent_map[$i]) && $tab_parent_map[$i] == '%' && (isset($path_map[$i]))) {
-      $tab_parent_map[$i] = $path_map[$i];
+        $tab_parent_map[$i] = $path_map[$i];
     }
   }
   $router_item['href'] = implode('/', $link_map);
@@ -2495,6 +2495,7 @@ function menu_link_get_preferred($path = NULL, $selected_menu = NULL) {
     $query->addField('ml', 'weight', 'link_weight');
     $query->fields('m');
     $query->condition('ml.link_path', $path_candidates, 'IN');
+    $query->addTag('preferred_menu_links');
 
     // Sort candidates by link path and menu name.
     $candidates = array();

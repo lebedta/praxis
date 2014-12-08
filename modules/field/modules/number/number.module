@@ -133,7 +133,6 @@ function number_field_instance_settings_form($field, $instance) {
  * - 'number_max': The value is greater than the allowed maximum value.
  */
 function number_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
-if(is_array($items)){
   foreach ($items as $delta => $item) {
     if ($item['value'] != '') {
       if (is_numeric($instance['settings']['min']) && $item['value'] < $instance['settings']['min']) {
@@ -150,7 +149,6 @@ if(is_array($items)){
       }
     }
   }
-}
 }
 
 /**

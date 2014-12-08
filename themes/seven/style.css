@@ -709,12 +709,7 @@ select.form-select:focus {
   color: #000;
   border-color: #ace;
 }
-html.js input.form-autocomplete {
-  background-position: 100% 4px;
-}
-html.js input.throbbing {
-  background-position: 100% -16px;
-}
+
 ul.action-links {
   margin: 1em 0;
   padding: 0 20px 0 20px; /* LTR */
@@ -993,11 +988,3 @@ div.add-or-remove-shortcuts {
   -webkit-border-radius: 8px;
   border-radius: 8px;
 }
-#edit-field-subjects-und div.form-type-checkbox{ width: 370px; float: left;}
-
-#edit-field-subjects-und { padding-bottom: 10px;}
-#edit-field-email { clear: both; }
-
-#doctor-page-node-form #field-slug-add-more-wrapper, #doctor-biography-node-form #field-slug-add-more-wrapper{display:none; !important;}
-
-
