@@ -269,3 +269,8 @@ html.js .js-hide {
   min-height: 1%;
 }
 
+.breadcrumb h3 {
+    display: inline;
+    font-family: Arial,sans-serif;
+    font-size: 12px;
+}
