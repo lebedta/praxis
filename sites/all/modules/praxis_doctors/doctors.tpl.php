@@ -7,17 +7,16 @@
                     <li class="doctor-thumbnail">
                         <a href="<?php if ($lang != 'de'): ?>/<?php print $lang; ?><?php endif ?>/team/<?php print getDoctorType($node)?>/<?php print getDoctorSlug($node) ?>">
                             <?php
+                                $items = field_get_items('node', $node, 'title_field');
+                                $name = field_view_value('node', $node, 'title_field', $items[0], array(), $lang);
+
                                 $image = array(
                                     'style_name' => 'home_doctor',
                                     'path' => isset($node->field_ph['und']) ? $node->field_ph['und'][0]['uri'] : '',
                                     'width' => '',
                                     'height' => '',
-				    'alt' => render($name),  	
-
+				                    'alt' => render($name),
                                 );
-                                $items = field_get_items('node', $node, 'title_field');
-                                $name = field_view_value('node', $node, 'title_field', $items[0], array(), $lang);
-//                            debug($name);
                             ?>
                             <?php print theme('image_style', $image); ?>
                             <span><?php print render($name); ?></span>
