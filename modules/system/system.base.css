@@ -274,3 +274,8 @@ html.js .js-hide {
     font-family: Arial,sans-serif;
     font-size: 12px;
 }
+
+#edit-field-header-image .image-preview img {
+    height: 313px;
+    width: 960px;
+}
