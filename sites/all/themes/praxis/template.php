@@ -28,33 +28,32 @@ function praxis_preprocess_html(&$variables) {
     drupal_add_js(path_to_theme() . '/js/jquery.validate.js');
     drupal_add_js(path_to_theme() . '/js/forms.js');
 
-
     if (count($variables['head_title_array']) > 1){
         $variables['head_title'] = $variables['head_title_array']['title'] .  " | " . $variables['head_title_array']['name'];
 //        $variables['head_title'] =   $variables['head_title_array']['title'] .  " | " . "Praxis am Bahnhof";
     }
     elseif(count($variables['head_title_array']) == 1 && $variables['is_front']){
         $variables['head_title'] = "Home" . " | " . $variables['head_title_array']['name'];
-$system_meta_keywords = array(
-       '#type' => 'html_tag',
-       '#tag' => 'meta',
-       '#attributes' => array(
-           'name' => 'keywords',
-           'content' => 'Arztpraxis, Rüti, Dürnten, Bubikon, Wald, Oberdürnten, Wolfhausen, Notfallarzt, Notarzt, Jona, Rapperswil, Notfall, Notfalldienst, Notfallmedizin, medizinischer Notfall, Arzt, Notfallnummern, Spitalnummern, Spitäler',
-          ),
-       );
-
-        $system_meta_description = array(
-        '#type' => 'html_tag',
-        '#tag' => 'meta',
-        '#attributes' => array(
-            'name' => 'description',
-            'content' => 'Die Praxis am Bahnhof direkt neben dem Bahnhof Rüti hat 365 Tage von 8 - 20 Uhr geöffnet!',
-        ),
-        );
-        
-        drupal_add_html_head($system_meta_description, 'my_meta');
-        drupal_add_html_head($system_meta_keywords, 'my_meta');
+//$system_meta_keywords = array(
+//       '#type' => 'html_tag',
+//       '#tag' => 'meta',
+//       '#attributes' => array(
+//           'name' => 'keywords',
+//           'content' => 'Arztpraxis, Rüti, Dürnten, Bubikon, Wald, Oberdürnten, Wolfhausen, Notfallarzt, Notarzt, Jona, Rapperswil, Notfall, Notfalldienst, Notfallmedizin, medizinischer Notfall, Arzt, Notfallnummern, Spitalnummern, Spitäler',
+//          ),
+//       );
+//
+//        $system_meta_description = array(
+//        '#type' => 'html_tag',
+//        '#tag' => 'meta',
+//        '#attributes' => array(
+//            'name' => 'description',
+//            'content' => 'Die Praxis am Bahnhof direkt neben dem Bahnhof Rüti hat 365 Tage von 8 - 20 Uhr geöffnet!',
+//        ),
+//        );
+//
+//        drupal_add_html_head($system_meta_description, 'my_meta');
+//        drupal_add_html_head($system_meta_keywords, 'my_meta');
     }
 }
 

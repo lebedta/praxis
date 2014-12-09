@@ -6,3 +6,4 @@ sites/*/settings*.php
 sites/*/private
 
 .idea/*
+sites/default/files/languages/*

@@ -499,7 +499,14 @@ function _field_filter_items($field, $items) {
       unset($items[$delta]);
     }
   }
-  return array_values($items);
+
+  if(!is_array($items)){
+    $result=null;
+  }else{
+    $result= array_values($items);
+  }
+
+  return $result;
 }
 
 /**

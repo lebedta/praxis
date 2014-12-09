@@ -102,6 +102,7 @@
         hide($content['links']);
 //        print render($content);
         ?>
+        <?php print render($content['metatags']); ?>
         <?php print render($content['title_field']); ?>
         <?php print render($content['field_type_of_employment']); ?>
         <?php if ($content['field_start_job_alter'][0]['#markup'] != ''): ?>

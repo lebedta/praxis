@@ -1,5 +1,4 @@
 <?php
-
 $region = block_get_blocks_by_region('sidebar_second');
 $items = field_get_items('node', $doctor, 'title_field');
 $name = field_view_value('node', $doctor, 'title_field', $items[0], array(), $lang);
@@ -129,17 +128,61 @@ $pref = $lang != 'en' ? "/".$lang : "";
                     <?php if ($page): ?>
                         <a href="<?php print $pref . "/". $link ?>"><?php print t('Curriculum Vitae'); ?></a>
                     <?php else: ?>
+                        <?php if(isset($doctor->metatags[$lang]) && $doctor->metatags[$lang]['keywords']['value'] != ''){
+                            $system_meta2 = array(
+                                '#type' => 'html_tag',
+                                '#tag' => 'meta',
+                                '#attributes' => array(
+                                    'name' => 'keywords',
+                                    'content' => $doctor->metatags[$lang]['keywords']['value'],
+                            ));
+                            drupal_add_html_head($system_meta2, 'my_meta');
+                        }
+
+                        if(isset($doctor->metatags[$lang]) && $doctor->metatags[$lang]['description']['value'] != ''){
+                            $system_meta1 = array(
+                                '#type' => 'html_tag',
+                                '#tag' => 'meta',
+                                '#attributes' => array(
+                                    'name' => 'description',
+                                    'content' => $doctor->metatags[$lang]['description']['value'],
+                            ));
+                            drupal_add_html_head($system_meta1, 'my_meta1');
+                        } ?>
                         <?php print t('Curriculum Vitae'); ?>
                     <?php endif; ?>
                 </li>
                 <?php foreach($pages as $value): ?>
                     <?php
+
                     $items = field_get_items('node', $value, 'field_button_title');
                     $title = field_view_value('node', $value, 'field_button_title', $items[0], array(), $lang);
                     if ($page && $page->nid == $value->nid){
                         $class = 'active';
                         $head_title =  drupal_get_title().' | ';
                         drupal_set_title($head_title.$title['#title']);
+
+                        if(isset($value->metatags[$lang]) && $value->metatags[$lang]['keywords']['value'] != ''){
+                            $system_meta2 = array(
+                                '#type' => 'html_tag',
+                                '#tag' => 'meta',
+                                '#attributes' => array(
+                                    'name' => 'keywords',
+                                    'content' => $value->metatags[$lang]['keywords']['value'],
+                                ));
+                            drupal_add_html_head($system_meta2, 'my_meta');
+                        }
+
+                        if(isset($value->metatags[$lang]) && $value->metatags[$lang]['description']['value'] != ''){
+                            $system_meta1 = array(
+                                '#type' => 'html_tag',
+                                '#tag' => 'meta',
+                                '#attributes' => array(
+                                    'name' => 'description',
+                                    'content' => $value->metatags[$lang]['description']['value'],
+                                ));
+                            drupal_add_html_head($system_meta1, 'my_meta1');
+                        }
                     }
                     else{
                         $class = '';

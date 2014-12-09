@@ -182,14 +182,12 @@ function doctor_view_page($bio_id, $page_slug){
 
     $page_id = reset($temp)->nid;
 
-
     $query = new EntityFieldQuery();
     $entities = $query->entityCondition('entity_type', 'node')
         ->entityCondition('bundle', 'doctor_page')
         ->fieldCondition('field_biografy_page','value', $bio_id, '=')
         ->pager(5)
         ->execute();
-
 
     $nodes = node_load_multiple(array_keys($entities['node']));
 

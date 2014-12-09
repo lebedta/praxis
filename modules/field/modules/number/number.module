@@ -133,19 +133,21 @@ function number_field_instance_settings_form($field, $instance) {
  * - 'number_max': The value is greater than the allowed maximum value.
  */
 function number_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
-  foreach ($items as $delta => $item) {
-    if ($item['value'] != '') {
-      if (is_numeric($instance['settings']['min']) && $item['value'] < $instance['settings']['min']) {
-        $errors[$field['field_name']][$langcode][$delta][] = array(
-          'error' => 'number_min',
-          'message' => t('%name: the value may be no less than %min.', array('%name' => $instance['label'], '%min' => $instance['settings']['min'])),
-        );
-      }
-      if (is_numeric($instance['settings']['max']) && $item['value'] > $instance['settings']['max']) {
-        $errors[$field['field_name']][$langcode][$delta][] = array(
-          'error' => 'number_max',
-          'message' => t('%name: the value may be no greater than %max.', array('%name' => $instance['label'], '%max' => $instance['settings']['max'])),
-        );
+  if(is_array($items)){
+    foreach ($items as $delta => $item) {
+      if ($item['value'] != '') {
+        if (is_numeric($instance['settings']['min']) && $item['value'] < $instance['settings']['min']) {
+          $errors[$field['field_name']][$langcode][$delta][] = array(
+            'error' => 'number_min',
+            'message' => t('%name: the value may be no less than %min.', array('%name' => $instance['label'], '%min' => $instance['settings']['min'])),
+          );
+        }
+          if (is_numeric($instance['settings']['max']) && $item['value'] > $instance['settings']['max']) {
+          $errors[$field['field_name']][$langcode][$delta][] = array(
+            'error' => 'number_max',
+            'message' => t('%name: the value may be no greater than %max.', array('%name' => $instance['label'], '%max' => $instance['settings']['max'])),
+          );
+        }
       }
     }
   }
