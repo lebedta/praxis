@@ -1088,7 +1088,8 @@ a.button {
   height: 33px;
   line-height: 33px;
   border:none;
-    display: inline-block;
+  display: inline-block;
+  width: 100%;
 }
 a.button:link,
 a.button:visited,

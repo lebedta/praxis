@@ -1,5 +1,4 @@
 jQuery(document).ready(function(){
-
 //mailchimp form
     jQuery('#mailchimp-signup-subscribe-block-subscribe-to-newsletter-form').validate({
         rules: {

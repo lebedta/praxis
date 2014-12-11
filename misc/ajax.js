@@ -431,9 +431,19 @@ Drupal.ajax.prototype.getEffect = function (response) {
     effect.showSpeed = '';
   }
   else if (type == 'fade') {
+
     effect.showEffect = 'fadeIn';
+
     effect.hideEffect = 'fadeOut';
+
     effect.showSpeed = speed;
+  }
+  else if (type == 'fade_in_out') {
+      effect.showEffect = 'fadeIn_my';
+
+      effect.hideEffect = 'fadeOut';
+
+      effect.showSpeed = speed;
   }
   else {
     effect.showEffect = type + 'Toggle';
@@ -530,7 +540,16 @@ Drupal.ajax.prototype.commands = {
       $('.ajax-new-content', new_content)[effect.showEffect](effect.showSpeed);
     }
     else if (effect.showEffect != 'show') {
-      new_content[effect.showEffect](effect.showSpeed);
+
+      if(effect.showEffect == 'fadeIn_my'){
+          //new_content[effect.showEffect](effect.showSpeed);
+            new_content.fadeIn();
+          jQuery("#form-ajax-message").delay(3000).fadeOut()
+      }
+      else {
+          new_content[effect.showEffect](effect.showSpeed);
+      }
+
     }
 
     // Attach all JavaScript behaviors to the new content, if it was successfully

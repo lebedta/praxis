@@ -301,19 +301,19 @@ function mailchimp_signup_subscribe_form($form, &$form_state, $signup, $type) {
   $form['submit'] = array(
     '#type' => 'submit',
     '#weight' => 10,
-    '#value' => $signup->settings['submit_button'],
-      '#ajax' => array(
-          'callback' => 'form_signup_ajax_callback',
-          'wrapper' => 'form-ajax-message',
-          'method' => 'replace',
-          'effect' => 'fade',
-      ),
+    '#value' => t($signup->settings['submit_button']),
+    '#ajax' => array(
+      'callback' => 'form_signup_ajax_callback',
+      'wrapper' => 'form-ajax-message',
+      'method' => 'replace',
+      'effect' => 'fade_in_out',
+    ),
   );
 
     $form['markup'] = array(
         '#prefix' => '<div id = "form-ajax-message">',
         '#suffix' => '</div>',
-        '#markup' => '',
+        '#markup' => '<script type="text/javascript"> jQuery("#form-ajax-message").change(jQuery("#form-ajax-message").delay(2000).html("")); </script>',
     );
 
   return $form;
@@ -368,7 +368,9 @@ function form_signup_ajax_callback($form, &$form_state){
 //    $form['markup']['#markup'] = $message;
 //    if (isset($form_state['message'])){
 //        $form['markup']['#markup'] = $form_state['message'];
-//    }
+//    } ]$form_state['rebuild'] = TRUE;
+    $path = drupal_get_path('module', 'mailchimp_campaign');
+    drupal_add_js($path . '/js/mailchimp_clear.js', 'file');
     return $form['markup'];
 
 }
@@ -425,7 +427,9 @@ function mailchimp_signup_subscribe_form_submit($form, &$form_state) {
       else{
             $message = "You have been successfully subscribed.";
       }
+
       drupal_set_message($message, 'status');
+
   }
 //    $form_state['message'] = $message;
 }
