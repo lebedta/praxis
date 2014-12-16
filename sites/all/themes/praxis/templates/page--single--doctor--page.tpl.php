@@ -206,26 +206,7 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
         </div>
     </div>
 
-    <div id="footer-wrapper">
-
-
-        <?php if ($page['footer_firstcolumn'] || $page['footer_secondcolumn'] || $page['footer_thirdcolumn'] || $page['footer_fourthcolumn']): ?>
-            <div id="footer-columns">
-                <?php print render($page['footer_firstcolumn']); ?>
-                <?php print render($page['footer_secondcolumn']); ?>
-                <?php print render($page['footer_thirdcolumn']); ?>
-                <?php print render($page['footer_fourthcolumn']); ?>
-            </div> 
-        <?php endif; ?>
-        <div class="footer-block">
-            <a class="copyright" href="http://jz-design.ch/" target="_blank">Design by JZdesign</a>
-            <?php if ($page['footer']): ?>
-                <div id="footer">
-                    <?php print render($page['footer']); ?>
-                </div> 
-            <?php endif; ?>
-        </div>
-    </div> 
+    <?php include_once('footer.php'); ?>
 
 </div></div> 
 

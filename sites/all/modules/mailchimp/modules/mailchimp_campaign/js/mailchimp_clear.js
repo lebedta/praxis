@@ -1,6 +1,5 @@
 jQuery(document).ready(function(){
-   jQuery("#edit-mergevars-email").val('');
-   jQuery("#edit-mergevars-fname").val('');
-   jQuery("#edit-mergevars-lname").val('');
-
+   jQuery(".form-item-mergevars-FNAME input").val('');
+   jQuery(".form-item-mergevars-LNAME input").val('');
+   jQuery(".form-item-mergevars-EMAIL input").val('');
 });

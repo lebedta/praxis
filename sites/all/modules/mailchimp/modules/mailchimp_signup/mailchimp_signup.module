@@ -292,6 +292,7 @@ function mailchimp_signup_subscribe_form($form, &$form_state, $signup, $type) {
     '#suffix' => '</div>',
     '#tree' => TRUE,
   );
+
   foreach ($signup->settings['mergefields'] as $tag => $mergevar) {
     if (!empty($mergevar)) {
       $form['mergevars'][$tag] = mailchimp_insert_drupal_form_tag($mergevar);
@@ -314,6 +315,7 @@ function mailchimp_signup_subscribe_form($form, &$form_state, $signup, $type) {
         '#prefix' => '<div id = "form-ajax-message">',
         '#suffix' => '</div>',
         '#markup' => '',
+        '#weight' => 0
     );
 
   return $form;

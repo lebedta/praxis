@@ -200,16 +200,7 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
 
                    
         </div>
-    </div> 
-        <div id="footer-wrapper">            
-            <div class="footer-block">
-                <a class="copyright" href="http://jz-design.ch/" target="_blank">Design by JZdesign</a>
-                <?php if ($page['footer']): ?>
-                    <div id="footer">
-                        <?php print render($page['footer']); ?>
-                    </div> 
-                <?php endif; ?>                
-            </div>
-        </div> 
+    </div>
+        <?php include_once('footer.php'); ?>
 
     </div></div> 

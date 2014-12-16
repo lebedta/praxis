@@ -827,12 +827,18 @@ ul.links {
 /* ------------------ Footer ------------------ */
 
 #footer-wrapper {
-  color: #595959;
+  color: #757676;
   font-size: 13px;
 }
 #footer-wrapper a {
- color: #595959;
+ color: #757676;
 }
+
+#footer-wrapper a span {
+    color: #b8b8b8;
+}
+
+
 #footer-wrapper a:hover,
 #footer-wrapper a:focus {
   
@@ -899,7 +905,7 @@ ul.links {
 }
 #footer {
   float: left;
-  max-width: 600px;
+  max-width: 120px;
   overflow: hidden;    
 }
 #footer .region {
@@ -1638,6 +1644,11 @@ div.admin-panel .description {
   background-color: #ddd;
 }
 
+#footer-wraper-block {
+  background-color: #1b1e20;
+}
+
+
 .notfall-pages div div .content{
     padding: 30px 0 0 0;
 }
@@ -1659,5 +1670,45 @@ div.admin-panel .description {
     margin: 0 2% 0 0;
 }
 
+#block-loger-loger-block h2,
+#block-views-specialties-view-block h2,
+#block-mailchimp-signup-subscribe-to-newsletter h2,
+#block-mailchimp-signup-home-subscribe-to-newsletter h2{
+    background-size: 329px 61px;
+    height: 61px;
+    width: 329px;
+    background: url("../images/widget_bg_left.png") no-repeat scroll 0 0 / 329px 61px rgba(0, 0, 0, 0);
+    margin: 0 0 0 -25px;
+    color: #FFFFFF;
+    padding-left: 27px;
+    padding-top: 16px;
+}
+
+#block-loger-loger-block,
+#block-views-specialties-view-block,
+#block-mailchimp-signup-subscribe-to-newsletter,
+#block-mailchimp-signup-home-subscribe-to-newsletter{
+    overflow: visible;
+    clear: both;
+}
+
+#block-loger-loger-block li:nth-child(1), #block-loger-loger-block li:nth-child(2) {
+    border-bottom: 1px solid #c0c0c2;
+}
+
+#block-loger-loger-block li {
+    padding: 0 0 10px !important;
+    margin: 0 0 10px;
+}
 
 
+#block-loger-loger-block .content,
+#block-views-specialties-view-block .content,
+#block-mailchimp-signup-subscribe-to-newsletter .content,
+#block-mailchimp-signup-home-subscribe-to-newsletter .content{
+    overflow: hidden;
+}
+
+#block-block-4 {
+    clear: both;
+}

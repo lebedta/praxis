@@ -108,7 +108,41 @@ a {
 }
 #footer-wrapper {
   padding: 0;
+  color: #c8c8c8;
 }
+
+#footer-wraper-block .praxis-info {
+    overflow: hidden;
+    margin: 0 0 20px;
+    padding: 2px 4px 5px;
+    border: none !important;
+    box-shadow: none !important;
+    width: 230px;
+    float: left;
+}
+
+#footer-wraper-block .links-listing-block {
+    width: 300px;
+    float: left;
+}
+
+#footer-wraper-block .links-listing-block ul {
+    margin: 0;
+    padding: 0;
+}
+
+
+#footer-wraper-block .praxis-info .praxis-contact {
+    padding: 0 !important;
+}
+
+#footer-wraper-block .praxis-info a,
+#footer-wraper-block .praxis-info p {
+    color: #c8c8c8 !important;
+    font-size: 13px !important;
+}
+
+
 .region-footer-firstcolumn,
 .region-footer-secondcolumn,
 .region-footer-thirdcolumn,
@@ -631,10 +665,6 @@ ul.menu > li  a {
     color: #393939;
 }
 
-#inner-sidebar-second ul > li a.active{
-    font-size: 13px;
-    color: #0f5abe;
-}
 .subscribe {
   overflow: hidden;
   width: 288px;
@@ -672,28 +702,64 @@ ul.menu > li  a {
     filter:alpha(opacity=70);
     cursor: pointer;
 }
-.home-main-sidebar {
+#sidebar-first .home-main-sidebar {
   overflow: visible;
   margin: 8px 0 10px 0;
-  padding: 12px 12px 16px 12px;
+  padding: 12px 12px 7px;
 
   box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-    background-color: #f4f6fb;
-    border: 2px solid #C8D0E6;
 }
 
-.home-main-sidebar.white{
+#sidebar-first .home-main-sidebar.white{
     background: #FFFFFF;
     margin: 8px 0 0;
-    border: 4px solid #E6E6E6;
-    border-radius: 4px 4px 4px 4px;
-    -moz-border-radius: 4px 4px 4px 4px;
-    -webkit-border-radius: 4px 4px 4px 4px;
-    -o-border-radius: 4px 4px 4px 4px;
-
+    border: 2px solid #919191;
 }
+
+#inner-sidebar-second .home-main-sidebar.white,
+#sidebar-second .home-main-sidebar.white{
+    background: #fff;
+    margin: 8px 0 0;
+    overflow: visible;
+}
+
+#inner-sidebar-second .home-main-sidebar,
+#sidebar-second .home-main-sidebar{
+    overflow: visible;
+    margin: 8px 0 10px 0;
+    padding: 12px 12px 7px 12px;
+
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 2px solid #919191;
+}
+
+#block-views-specialties-view-block .content {
+    margin: 0 0 0 -18px;
+    width: 322px;
+}
+#block-views-specialties-view-block .content .view-specialties-view {
+    width: 322px;
+}
+
+#block-views-specialties-view-block li {
+    padding-top: 5px !important;
+}
+
+#block-views-specialties-view-block li:before{
+    content: '' !important;
+}
+
+#block-views-specialties-view-block li {
+    background-color: #f2f8fb;
+}
+
+#block-views-specialties-view-block li:nth-child(2n+1) {
+    background-color: #FFFFFF;
+}
+
+
 
 .scadhule-block {
   overflow: hidden;
@@ -926,24 +992,20 @@ div.slidesjs-container {
   overflow:hidden;
   margin: 9px 0 0;
   height: 442px;
-  border: 4px solid #E6E6E6;
-  border-radius: 4px 4px 4px 4px;
-  -moz-border-radius: 4px 4px 4px 4px;
-  -webkit-border-radius: 4px 4px 4px 4px;
-  -o-border-radius: 4px 4px 4px 4px;
-  -ms-border-radius: 4px 4px 4px 4px;
   padding: 0;
 }
 #block-praxis-doctors-home-doctors .content {
     overflow: hidden;
+    margin-left: 30px;
 }
 #block-praxis-doctors-home-doctors h2 {
   overflow: hidden;
   height: 73px;
-  margin: 0;
+  margin: 0 0 0 49px;
+
   padding: 11px 43px 0;
   font-family: Arial, sans-serif;
-  background-color: #E6E6E6;
+  border: 1px solid;
   font-size: 22px;
   color: #231F20;
   box-sizing: border-box;
@@ -1005,7 +1067,7 @@ li.slidesjs-slide ul > li a span {
   height: 25px;
 }
 a.slidesjs-previous {
-  margin: 0 0 7px 574px;
+  margin: 0 0 7px 570px;
   background: url(../images/previous_btn.png);
   background-repeat: no-repeat;
   background-position: 0 0;
@@ -1030,7 +1092,7 @@ a.slidesjs-previous, a.slidesjs-next {
   outline: none;
 }
 a.slidesjs-next {
-  margin: 0 18px 7px 6px;
+  margin: 0 0px 7px 6px;
   background: url(../images/next_btn.png);
   background-repeat: no-repeat;
   background-position: 0 0;
@@ -1070,42 +1132,59 @@ a.slidesjs-next:hover {
   width: 960px;
   min-width: 920px;
   margin: 0 auto;
-  padding: 10px 0px 9px;
-  background-color: #E6E6E6;
+  padding: 13px 0 11px 9px;
   clear: both;	
 }
 .footer-block .copyright {
   overflow: hidden;
-  float: right;
-  margin: 0;
+  margin: 0 0 0 95px;
   font-family: Arial, sans-serif;
   font-size: 13px;
     padding: 0 17px;
   color: #595959;
+}
+
+#footer-wrapper .footer-social-block {
+    float: right;
 }
 #block-menu-menu-footer-menu {
   overflow: hidden;
 }
+
+#block-menu-menu-footer-menu .content ul.menu {
+    width: 85px;
+}
+
+#block-menu-menu-footer-menu .content ul.menu li {
+    display: table-cell;
+    list-style-type: none;
+    margin: 0 0 3px 0;
+    vertical-align: middle;
+
+}
+
 #block-menu-menu-footer-menu .content .menu {
   overflow: hidden;
-    padding: 0 17px;
+
 }
 #block-menu-menu-footer-menu .content .menu > li {
   overflow: hidden;
   float: left;
-  height: 20px;
+  height: 17px;
 }
 #block-menu-menu-footer-menu .content .menu > li a {
   display: inline-block;
-  padding: 0 7px 0 5px;
+  padding: 0 7px 0 0;
   line-height: 20px;
   font-size: 13px;
   font-family: Arial, sans-serif;
   color: #595959;
-  background: url(../images/footer_menu_separater.png) no-repeat center right;
 }
 #block-menu-menu-footer-menu .content .menu > li.first a {
-  padding: 0 7px 0 0;
+}
+
+#footer li a {
+    border: none !important;
 }
 ul, menu, dir {
 display: block;
@@ -1173,21 +1252,28 @@ display: block;
 .sidebar-right-inner .scadhule-block,
 .sidebar-right-inner .praxis-contact,
 .sidebar-right-inner .subscribe, 
-.block-loger, #sidebar-second .home-main-sidebar,
-#block-views-internal-block-1,
-#block-views-specialties-view-block {
+#sidebar-second .home-main-sidebar,
+#block-views-internal-block-1 {
     overflow: hidden;
-    background-color: #f4f6fb;
-    border: 2px solid #c8d0e6;
+    background-color: #FFFFFF;
+    border: 2px solid #919191;
 }
+
+#block-views-specialties-view-block, .block-loger, #block-mailchimp-signup-subscribe-to-newsletter {
+    overflow: hidden;
+    background-color: #fff;
+    border: 2px solid #919191;
+    margin: 0 0 10px;
+    padding: 12px 10px 16px 18px;
+}
+
 #sidebar-second .home-main-sidebar {
     border-radius: 0;
 }
 .sidebar-right-inner .scadhule-block,
 .sidebar-right-inner .praxis-contact,
 .sidebar-right-inner .subscribe,
-#block-views-internal-block-1,
-#block-views-specialties-view-block {
+#block-views-internal-block-1{
     margin: 0 0 10px;
     padding: 20px 10px 16px 18px;
 }
@@ -1196,9 +1282,8 @@ display: block;
     margin: 31px 0 10px;
 }
 .block-loger {
-
     margin: 0 0 10px;
-    padding: 20px 10px 16px 18px;
+    padding: 12px 10px 16px 18px;
 }
 .sidebar-right-inner .subscribe {
     overflow: hidden;
@@ -1258,7 +1343,7 @@ display: block;
     display: block;
     float: left;
     line-height: 12px;
-    margin: 3px 6px 8px;
+    margin: 3px 7px 8px;
     /*background: url(../images/list_icon.png) no-repeat center left;*/
 }
 #inner-sidebar-second ul > li {
@@ -2501,17 +2586,21 @@ a.sign-up.button:hover {
     float: left;
     padding: 0 5px 0 0;
 }
-.loger-list > li .date,
+.loger-list > li .date{
+    overflow: hidden;
+    color: #a2a2a2;
+}
 .loger-list > li .user {
     overflow: hidden;
-    font-style: italic;
+    color: #6696bc;
 }
+
 #block-loger-loger-block .content .link-more {
     display: block;
     margin: 0 20px 0 0;
     font-size: 16px;
-    text-align: right;
-    color: #0f5abe;
+    text-align: left;
+    color: #6696bc;
 }
 /*----------------------------< Adressen Page >---------------------------*/
 .adressen-inner {
@@ -3188,8 +3277,8 @@ ul.editing-nav {
     color: #272727;
     font-size: 0.914em;
     line-height: 1.4;
-    background-color: #F4F6FB;
-    border: 2px solid #C8D0E6;
+    background-color: #FFF;
+    border: 2px solid #919191;
     overflow: hidden;
     padding: 20px 17px 16px;
 }
@@ -3210,7 +3299,12 @@ ul.editing-nav {
 .mailchimp-signup-subscribe-form .mailchimp-newsletter-mergefields .form-item {
     overflow: hidden;
     margin: 0 0 10px;
-    width: 100%;
+    width: 50%;
+    float: left;
+}
+
+.form-item.form-type-textfield.form-item-mergevars-EMAIL {
+    width: 75% !important;
 }
 .mailchimp-signup-subscribe-form .mailchimp-newsletter-mergefields .form-item label {
     color: #393939;
@@ -3229,19 +3323,21 @@ ul.editing-nav {
     margin: 0;
     color: #000;
     font-size: 13px;
-    width: 60%;
+    width: 90%;
     display: block;
     overflow: hidden;
-    float: right;
+    float: left;
 }
+
 .mailchimp-signup-subscribe-form .form-submit{
-    background-color: #454545;
-    height: 35px;
-    line-height: 35px;
+    background-color: #3089aa;
+    height: 26px;
+    line-height: 24px;
     font-size: 12px;
     float: right;
     overflow: hidden;
     margin: 0;
+    width: 73px;
 }
 .view-download-page .views-row .downloads {
     margin: 0 0 30px;
@@ -3949,24 +4045,37 @@ ul.phone-list > li:before {
 
 .schedule-widget {
     background: url(../images/widget_bg.png) no-repeat;
-    background-size: 314px 105px;
-    -moz-background-size: 314px 105px;
-    -webkit-background-size: 314px 105px;
+    background-size: 311px 105px;
+    -moz-background-size: 311px 105px;
+    -webkit-background-size: 311px 105px;
     margin: 0 0 0 -20px;
     padding: 0;
-    width: 314px;
+    width: 311px;
+    height: 105px;
+    overflow: visible;
+}
+
+#inner-sidebar-second .white .schedule-widget,
+#sidebar-second .white .schedule-widget{
+    background: url(../images/widget_bg.png) no-repeat;
+    background-size: 329px 105px;
+    -moz-background-size: 329px 105px;
+    -webkit-background-size: 329px 105px;
+    margin: 0 0 0 -19px;
+    padding: 0;
+    width: 329px;
     height: 105px;
     overflow: visible;
 }
 
 .white .schedule-widget{
     background: url(../images/widget_bg.png) no-repeat;
-    background-size: 314px 105px;
-    -moz-background-size: 314px 105px;
-    -webkit-background-size: 314px 105px;
-    margin: 0 0 0 -22px;
+    background-size: 311px 105px;
+    -moz-background-size: 311px 105px;
+    -webkit-background-size: 311px 105px;
+    margin: 0 0 0 -19px;
     padding: 0;
-    width: 314px;
+    width: 311px;
     height: 105px;
     overflow: visible;
 }
@@ -3989,7 +4098,7 @@ ul.phone-list > li:before {
     overflow: hidden;
     float: left;
     width: 66px;
-    margin: 0 16px 0 0;
+    margin: 1px 16px 0 3px;
     text-align: center;
 }
 .schedule-widget-days-block span {

@@ -372,6 +372,8 @@ function mailchimp_lists_form_field_ui_field_edit_form_alter(&$form, &$form_stat
     $form['field']['cardinality']['#default_value'] = 1;
     $form['field']['cardinality']['#access'] = FALSE;
     $form['#validate'][] = 'mailchimp_lists_form_field_ui_field_edit_form_validate';
+
+
   }
 }
 
