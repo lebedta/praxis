@@ -588,7 +588,7 @@ ul.menu > li  a {
 .content-article-wrapper {
   overflow: hidden;
   width: 100%;
-  background: url(../images/pages_top_bg.png) repeat-x;
+  /*background: url(../images/pages_top_bg.png) repeat-x;*/
 }
 .main_container_inner {
   overflow: visible;

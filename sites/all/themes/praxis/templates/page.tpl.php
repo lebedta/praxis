@@ -101,13 +101,7 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
 
         <div id="header-wrap">
             <div id="header">
-                <div class="header-right-block">
 
-                    <div class="telephone">
-                        <p >+41 55 555 05 05</p>
-                        <span>&nbsp; </span>
-                    </div>
-                </div>
                 <div class="logo">
                     <a href="<?php print $front_page; ?>"><h1><?php print $site_name; ?></h1></a>
                 </div>

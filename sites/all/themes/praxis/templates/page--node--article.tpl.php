@@ -101,23 +101,7 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
 
         <div id="header-wrap">
             <div id="header">
-                <div class="header-right-block">
-                    <ul class="social-media">
-                        <li class="fb">
-                            <a target="_blank" href="http://www.facebook.com/pages/Praxis-am-Bahnhof/127140757364554">Facebook</a>
-                        </li>
-                        <li class="tw">
-                            <a target="_blank" href="http://twitter.com/praxisambahnhof">Twitter</a>
-                        </li>
-                        <li class="like">
-                            <div class="fb-like" data-href="http://new.praxisambahnhof.ch/" data-width="58" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-                        </li>
-                    </ul>
-                    <div class="telephone">
-                        <p >+41 55 555 05 05</p>
-                        `        <span>&nbsp; </span>
-                    </div>
-                </div>
+
                 <div class="logo">
                     <a href="<?php print $front_page; ?>"><h1><?php print $site_name; ?></h1></a>
                 </div>
@@ -210,7 +194,9 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
         </div>
     </div>
 
-            <?php include_once('footer.php'); ?>
 
-</div></div> 
+
+</div>
+        <?php include_once('footer.php'); ?>
+    </div>
 
