@@ -94,9 +94,7 @@ a {
 .sidebar .section {
   padding: 0;
 }
-#breadcrumb {
-  margin: 0 15px;
-}
+
 #breadcrumb h2 {
     display: none;
 }
@@ -109,12 +107,13 @@ a {
 #footer-wrapper {
   padding: 0;
   color: #c8c8c8;
+  padding-top: 40px;
 }
 
 #footer-wraper-block .praxis-info {
     overflow: hidden;
-    margin: 0 0 20px;
-    padding: 2px 4px 5px;
+    margin: 0px;
+    padding: 2px 5px 5px;
     border: none !important;
     box-shadow: none !important;
     width: 230px;
@@ -127,7 +126,7 @@ a {
 }
 
 #footer-wraper-block .links-listing-block ul {
-    margin: 0;
+    margin: 7px 0 0 0;
     padding: 0;
 }
 
@@ -225,7 +224,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
 }
 .social-media {
   overflow: hidden;
-  margin: 10px 0 9px;
+  margin: 0px 0 9px;
 }
 .social-media > li {
   overflow: hidden;
@@ -705,7 +704,7 @@ ul.menu > li  a {
     line-height: 7px;
 }
 #inner-sidebar-second ul > li a {
-    font-size: 13px;
+    font-size: 11px;
     color: #393939;
 }
 
@@ -930,7 +929,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
   background: url(../images/links_list_sprite1.png);
   background-repeat: no-repeat;
   text-indent: -9999px;
-  background-size: 311px;
+  /*background-size: 311px;*/
+  background-size: 277px 46px;
 }
 
 #header .search {
@@ -1013,11 +1013,11 @@ only screen and (min-resolution: 240dpi) {
 .links-listing > li.emergency a {
   width: 105px;
   margin: 0 8px 0 0;
-  background-position: -83px 0;
+  background-position: -73px 0;
 }
 .links-listing > li.medix a {
   width: 105px;
-  background-position: -210px 0;
+  background-position: -187px 0;
 }
 #content-specialities-page ul.timetable,
 .timetable {
@@ -1237,7 +1237,7 @@ a.slidesjs-next:hover {
   width: 960px;
   min-width: 920px;
   margin: 0 auto;
-  padding: 13px 0 11px 9px;
+  padding: 25px 0 25px 9px;
   clear: both;	
 }
 .footer-block .copyright {
@@ -1283,7 +1283,7 @@ a.slidesjs-next:hover {
   line-height: 20px;
   font-size: 13px;
   font-family: Open Sans, sans-serif;
-  color: #595959;
+  color: #c8c8c8;
 }
 #block-menu-menu-footer-menu .content .menu > li.first a {
 }
@@ -1303,26 +1303,30 @@ display: block;
 /*-----------------< PAGES >--------------------*/
 /*----------------------------------------------*/
 /*----------------------< Breadcrumb >---------------------*/
+#breadcrumb {
+    width: 50%;
+}
 .breadcrumb {
   overflow: hidden;
-  height: 37px;
+  height: 29px;
   line-height: 37px;
   padding: 0;
-  color: #fff;
+  color: #7a7a7a;
   font-family: Open Sans, sans-serif;
+  margin-top: -29px;
 }
 .breadcrumb a {
   margin: 0 6px 0 0;
-  color: #fff;
   font-size: 12px;
+  color: #7a7a7a;
   font-family: Open Sans, sans-serif;
 }
 .breadcrumb a:after {
     content: '>';
     display: inline-block;
     padding: 0 0 0 6px;
-    color: #fff;
     font-size: 11px;
+    color: #7a7a7a;
     font-family: Open Sans, sans-serif;
 }
 
@@ -1330,10 +1334,8 @@ display: block;
     content: '';
 }
 .breadcrumb a:hover {
-  color: #fff;
+  color: #7a7a7a;
   text-decoration: none;
-  opacity: 0.8;
-  filter: alpha(opacity=80);
 }
 .breadcrumb .delimiter {
     display: none;
@@ -1343,7 +1345,7 @@ display: block;
    display: inline;
    font-size: 12px;
    font-family: Open Sans, sans-serif;
-   color: #fff;
+   color: #7a7a7a;
  }
 /*---------------------------------------------------------*/
 /*-------------------< Sidebar Right >---------------------*/
@@ -1361,13 +1363,13 @@ display: block;
 #block-views-internal-block-1 {
     overflow: hidden;
     background-color: #FFFFFF;
-    border: 2px solid #919191;
+    border: 1px solid #919191;
 }
 
 #block-views-specialties-view-block, .block-loger, #block-mailchimp-signup-subscribe-to-newsletter {
     overflow: hidden;
     background-color: #fff;
-    border: 2px solid #919191;
+    border: 1px solid #919191;
     margin: 0 0 10px;
     padding: 12px 10px 16px 18px;
 }
@@ -1459,7 +1461,8 @@ display: block;
 #sidebar-second #block-views-specialties-view-block ul > li a,
 .view-specialties-view .item-list ul.ocupation-list > li a {
     color: #393939;
-    font-size: 12px;
+    font-size: 11px;
+    text-decoration: none;
 }
 #block-views-internal-block-1 h2 {
     margin: 0 0 5px;
@@ -1519,6 +1522,14 @@ display: block;
   position: relative;
   height: 313px;
 }
+.login-top-block {
+    margin-bottom: 34px;
+}
+
+.news-head {
+    margin-bottom: 34px;
+}
+
 .news-head.downloads-head {
   background-color: #fff;
 }
@@ -1539,7 +1550,7 @@ display: block;
   line-height: 59px;
   background-color: rgba(11,11,11, 0.7);
   font-size: 27px;
-  color: #fff;
+  color: #3089aa;
   font-weight: 700;
 }
 .login-top-block h2.brown {
@@ -4163,12 +4174,12 @@ ul.phone-list > li:before {
 #inner-sidebar-second .white .schedule-widget,
 #sidebar-second .white .schedule-widget{
     background: url(../images/widget_bg.png) no-repeat;
-    background-size: 329px 105px;
+    background-size: 331px 105px;
     -moz-background-size: 329px 105px;
     -webkit-background-size: 329px 105px;
     margin: 0 0 0 -19px;
     padding: 0;
-    width: 329px;
+    width: 331px;
     height: 105px;
     overflow: visible;
 }
@@ -4221,7 +4232,7 @@ ul.phone-list > li:before {
 .schedule-widget-days-block p {
     text-transform: uppercase;
     font-size: 13px;
-    margin: 3px 0 0;
+    margin: 4px 0 0;
 }
 .schedule-widget-hours-block p {
     font-size: 16px;

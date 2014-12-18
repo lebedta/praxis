@@ -111,9 +111,6 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
         <div class="content-login-wrapper">
             <div class="main_container_inner">
                 <div id="login-wrapper">
-                    <?php if ($breadcrumb): ?>
-                        <div id="breadcrumb"><?php print $breadcrumb; ?></div>
-                    <?php endif; ?>
                     <div class="login-top-block">
                         <img src="/sites/all/themes/praxis/images/notfall_img.png" alt="login" />
                         <?php if ($title): ?>
@@ -121,6 +118,9 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
                         <?php endif; ?>
 
                     </div>
+                    <?php if ($breadcrumb): ?>
+                        <div id="breadcrumb"><?php print $breadcrumb; ?></div>
+                    <?php endif; ?>
                     <div class="logger-page">
                         <a id="main-content"></a>
                         <?php print render($title_prefix); ?>

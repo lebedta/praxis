@@ -123,10 +123,6 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
                 <div id="content-specialities-page" class="column"><div class="section">
                         <div id="main" class="">
 
-                            <?php if ($breadcrumb): ?>
-                                <div id="breadcrumb"><?php print $breadcrumb; ?></div>
-                            <?php endif; ?>
-
                             <?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
                             <div class="body-inner">
                                 <a id="main-content"></a>
@@ -142,7 +138,11 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
                                 <?php print render($page['content']); ?>
                                 <?php print $feed_icons; ?>
 
-                            </div></div>
+                            </div>
+                            <?php if ($breadcrumb): ?>
+                                <div id="breadcrumb"><?php print $breadcrumb; ?></div>
+                            <?php endif; ?>
+                        </div>
 
 
                     </div>

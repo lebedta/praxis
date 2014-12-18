@@ -97,72 +97,93 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
         js.src = "//connect.facebook.net/<?php print $locales[$language->language]?>/sdk.js#xfbml=1&appId=305264592938569&version=v2.0";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
-<div id="page-wrapper"><div id="page">
-
+<div id="page-wrapper">
+    <div id="page">
         <?php include_once('header.php'); ?>
 
         <?php if ($messages): ?>
-            <div id="messages"><div class="section clearfix">
-                <?php print $messages; ?>
-           </div></div> 
+            <div id="messages">
+                <div class="section clearfix">
+                    <?php print $messages; ?>
+                </div>
+            </div>
         <?php endif; ?>
 
         <div class="content-pages-wrapper">
             <div class="main_container_inner">
                 <?php if ($page['featured']): ?>
-                    <div id="featured"><div class="section clearfix">
+                    <div id="featured">
+                        <div class="section clearfix">
                             <?php print render($page['featured']); ?>
-                        </div></div> 
+                        </div>
+                    </div>
                 <?php endif; ?>
                 
                 <?php if ($page['sidebar_first']): ?>
-                    <div id="sidebar-first" class="column sidebar-right"><div class="section">
+                    <div id="sidebar-first" class="column sidebar-right">
+                        <div class="section">
                             <?php print render($page['sidebar_first']); ?>
-                        </div></div> 
+                        </div>
+                    </div>
                 <?php endif; ?>
 
-                <div id="content" class="column"><div class="section">
+                <div id="content" class="column">
+                    <div class="section">
                         <div id="main" class="">
-                                
-                                <?php if ($breadcrumb): ?>
-                                    <div id="breadcrumb"><?php print $breadcrumb; ?></div>
-                                <?php endif; ?>
 
-                                <?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
-                                <div class="body-inner">
-                                    <a id="main-content"></a>
-                                    
-                                    <?php print render($title_suffix); ?>
+                        <?php if ($page['highlighted']): ?>
+                            <div id="highlighted">
+                                <?php print render($page['highlighted']); ?>
+                            </div>
+                        <?php endif; ?>
+                        <div class="body-inner">
+                            <a id="main-content"></a>
+                            <?php print render($title_suffix); ?>
 
-                                    <?php print render($page['help']); ?>
-                                    <?php if ($action_links): ?>
-                                        <ul class="action-links">
-                                            <?php print render($action_links); ?>
-                                        </ul>
-                                    <?php endif; ?>
-                                    <?php print render($page['content']); ?>
-                                    <?php print $feed_icons; ?>
+                            <?php print render($page['help']); ?>
 
-                                </div></div> 
-
-                            <?php if ($page['sidebar_second']): ?>
-                                <div id="sidebar-second" class="column sidebar"><div class="section">
-                                        <?php print render($page['sidebar_second']); ?>
-                                    </div></div> 
+                            <?php if ($action_links): ?>
+                                <ul class="action-links">
+                                    <?php print render($action_links); ?>
+                                </ul>
                             <?php endif; ?>
+
+                            <?php print render($page['content']); ?>
+                            <?php print $feed_icons; ?>
+
                         </div>
 
-                    </div></div> 
+                        <?php if ($breadcrumb): ?>
+                            <div id="breadcrumb">
+                                <?php print $breadcrumb; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
 
-                <?php if ($page['triptych_first'] || $page['triptych_middle'] || $page['triptych_last']): ?>
-                    <div id="triptych-wrapper"><div id="triptych" class="clearfix">
-                            <?php print render($page['triptych_first']); ?>
-                            <?php print render($page['triptych_middle']); ?>
-                            <?php print render($page['triptych_last']); ?>
-                        </div></div> 
-                <?php endif; ?>
-            </div>    
+                    <?php if ($page['sidebar_second']): ?>
+                        <div id="sidebar-second" class="column sidebar">
+                            <div class="section">
+                                <?php print render($page['sidebar_second']); ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                </div>
+
+            </div>
         </div>
+
+        <?php if ($page['triptych_first'] || $page['triptych_middle'] || $page['triptych_last']): ?>
+            <div id="triptych-wrapper">
+                <div id="triptych" class="clearfix">
+                    <?php print render($page['triptych_first']); ?>
+                    <?php print render($page['triptych_middle']); ?>
+                    <?php print render($page['triptych_last']); ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
 
     <?php include_once('footer.php'); ?>
 

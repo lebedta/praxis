@@ -1679,11 +1679,16 @@ div.admin-panel .description {
     background-size: 329px 61px;
     height: 61px;
     width: 329px;
-    background: url("../images/widget_bg_left.png") no-repeat scroll 0 0 / 329px 61px rgba(0, 0, 0, 0);
+    background: url("../images/widget_bg_left.png") no-repeat scroll 0 0 / 331px 61px rgba(0, 0, 0, 0);
     margin: 0 0 0 -25px;
     color: #FFFFFF;
     padding-left: 27px;
     padding-top: 16px;
+    font-size: 19px;
+}
+#block-mailchimp-signup-subscribe-to-newsletter h2,
+#block-loger-loger-block h2 {
+    font-weight: normal;
 }
 
 #block-loger-loger-block,

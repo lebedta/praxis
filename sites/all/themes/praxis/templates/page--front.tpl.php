@@ -126,9 +126,6 @@
         <div id="content" class="main-column landing"><div class="section">
                 <div id="main-wrapper" class="clearfix"><div id="main" class="clearfix">
                         
-                        <?php if ($breadcrumb): ?>
-                            <div id="breadcrumb"><?php print $breadcrumb; ?></div>
-                        <?php endif; ?>
 
                         <?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
                         <div class="body-inner">
@@ -150,7 +147,11 @@
                             <?php print render($page['content']); ?>
                             <?php print $feed_icons; ?>
 
-                        </div></div> 
+                        </div>
+                        <?php if ($breadcrumb): ?>
+                            <div id="breadcrumb"><?php print $breadcrumb; ?></div>
+                        <?php endif; ?>
+                    </div>
 
                     <?php if ($page['sidebar_second']): ?>
                         <div id="sidebar-second" class="column sidebar"><div class="section">

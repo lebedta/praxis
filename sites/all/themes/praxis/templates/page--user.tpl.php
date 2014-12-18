@@ -111,13 +111,14 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
     <div class="content-login-wrapper">
         <div class="main_container_inner">
             <div id="login-wrapper">
-                        <?php if ($breadcrumb): ?>
-                            <div id="breadcrumb"><?php print $breadcrumb; ?></div>
-                            <?php endif; ?>
+
                             <div class="login-top-block">
                                 <img src="/sites/default/files/login_img.png" alt="login" />
                                 <h2 class="brown">Log in</h2>
                             </div>
+                <?php if ($breadcrumb): ?>
+                    <div id="breadcrumb"><?php print $breadcrumb; ?></div>
+                <?php endif; ?>
                         <div class="body-inner">
                             <a id="main-content"></a>
                             <?php print render($title_prefix); ?>
