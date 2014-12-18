@@ -104,7 +104,7 @@ body,
 #site-slogan,
 .ui-widget,
 .comment-form label {
-  font-family: Arial, sans-serif;
+  font-family: Open Sans, sans-serif;
 }
 #header,
 #footer-wrapper,
@@ -455,6 +455,8 @@ h1#site-name {
 
 #main-menu {
   clear: both;
+  width: 440px;
+  float: left;
 }
 #main-menu-links {
   font-size: 0.929em;
