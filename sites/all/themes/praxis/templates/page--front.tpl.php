@@ -120,7 +120,7 @@
         <?php if ($page['sidebar_first']): ?>
             <div id="sidebar-first" class="column sidebar-left">
                     <?php print render($page['sidebar_first']); ?>
-                </div> 
+                </div>
         <?php endif; ?>
 
         <div id="content" class="main-column landing"><div class="section">
@@ -177,11 +177,14 @@
 <script type="text/javascript" src="/sites/all/themes/praxis/js/jquery.mCustomScrollbar.min.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function(){
-        jQuery('#block-views-specialties-view-block-1 .item-list').mCustomScrollbar();
-        jQuery('.expanded a').click(function(){
-                jQuery('.expanded ul').css("display","block").addClass("current");
-            }
-        )
+        jQuery('#block-views-specialties-view-block-1 .item-list').mCustomScrollbar({
+            scrollInertia:200
+        });
+
+//        jQuery('.expanded a').click(function(){
+//                jQuery('.expanded ul').css("display","block").addClass("current");
+//            }
+//        )
     });
 //    (function($){
 //        $(window).load(function(){

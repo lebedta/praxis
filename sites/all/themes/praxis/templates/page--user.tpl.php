@@ -101,13 +101,6 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
 
         <?php include_once('header.php'); ?>
 
-        <?php if ($messages): ?>
-            <div id="messages"><div class="section clearfix">
-                <?php print $messages; ?>
-            </div></div> 
-        <?php endif; ?>
-
-
     <div class="content-login-wrapper">
         <div class="main_container_inner">
             <div id="login-wrapper">
@@ -119,7 +112,13 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
                 <?php if ($breadcrumb): ?>
                     <div id="breadcrumb"><?php print $breadcrumb; ?></div>
                 <?php endif; ?>
+
                         <div class="body-inner">
+                            <?php if ($messages): ?>
+                                <div id="messages"><div class="section clearfix">
+                                        <?php print $messages; ?>
+                                    </div></div>
+                            <?php endif; ?>
                             <a id="main-content"></a>
                             <?php print render($title_prefix); ?>
                             <?php if ($title): ?>
@@ -140,12 +139,9 @@ $locales = array('en' => 'en_GB', 'de' => 'de_DE');
                             <div style="clear: both"></div>
                             <div class="login-links">
                                 <a class="forgot-password" href="/user/password">Forgot password?</a>
-
+                                <a class="sign-up" href="/ems/register">Sign up</a>
                             </div>
                             <?php print $feed_icons; ?>
-                            <div class="line"></div>
-                            <a class="sign-up button" href="/ems/register">Registrieren für Notfallabgabesystem</a>
-
                         </div>
 
                     <?php if ($page['sidebar_second']): ?>

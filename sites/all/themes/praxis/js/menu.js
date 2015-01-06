@@ -6,6 +6,6 @@ jQuery(document).ready(function(){
     });
     jQuery('li.expanded').mouseleave(function(){
         jQuery('.menu', jQuery('li.expanded')).hide();
-        jQuery('.menu', jQuery(active)).show();
+//        jQuery('.menu', jQuery(active)).show();
     });
 });

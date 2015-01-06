@@ -237,8 +237,12 @@ function praxis_field__taxonomy_term_reference($variables) {
 
 
 function praxis_menu_link($variables){
-//    return theme_menu_link($variables);
+    //return theme_menu_link($variables);
+    global $language;
+   // $locales = array('en' => 'en_GB', 'de' => 'de_DE');
+
     $element = $variables['element'];
+
     $sub_menu = '';
 
     $element['#attributes']['class'][] = 'depth-' . $element['#original_link']['depth'];
@@ -246,6 +250,31 @@ function praxis_menu_link($variables){
     if ($element['#below']) {
         $sub_menu = drupal_render($element['#below']);
     }
+
+    if($variables['element']['#title'] == t('Areas of Expertise') || $variables['element']['#title'] == t('Fachgebiete')) {
+        $sub_menu = "<ul class='menu big clearfix'>";
+        $query = new EntityFieldQuery();
+        $entities = $query->entityCondition('entity_type', 'node')
+            ->entityCondition('bundle', 'specialties_page')
+            ->propertyCondition('status', NODE_PUBLISHED)
+            ->propertyOrderBy('title')
+            ->execute();
+
+        foreach($entities['node'] as $key => $entity ){
+            $node = node_load($key);
+            $class='';
+            if(current_path() == 'node/'.$node->nid){
+                $class ='active';
+            }
+            $sub_menu .= "<li class='leaf depth-2 ".$class."'>
+                           <a class='".$class."' title='' href='/".$language->language."/".drupal_get_path_alias('node/'.$node->nid)."'>".$node->title."</a></li>";
+        }
+
+        $element['#attributes'] = array('class'=>array('expanded','depth-1'));
+
+        $sub_menu .= "</ul>";
+    }
+
 
     if (strpos($sub_menu,'active') !== false){
         $class = 'active';
@@ -256,6 +285,8 @@ function praxis_menu_link($variables){
     $options = $element['#localized_options'];
     $options['attributes']['class'][] = $class;
     $output = l($element['#title'], $element['#href'], $options);
+    if(strpos($output,"active")>0){
+        $element['#attributes']['class'][] = "active";}
     return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
 
 }

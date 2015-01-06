@@ -122,7 +122,34 @@ $pref = $lang != 'en' ? "/".$lang : "";
 
 <div class="doctor">
     <div class="wrap">
+
+        <div class="left-column-single-doctors">
+            <div class="doctor-img-wrap">
+                <a class="lightbox" rel="lightbox" href="<?php print file_create_url(isset($doctor->field_ph['und']) ? $doctor->field_ph['und'][0]['uri'] : ''); ?>">
+                    <?php print theme('image_style', $image); ?>
+                </a>
+            </div>
+            <ul class="editing-nav">
+                <?php if ( (($user->uid == $doctor->uid && $user->uid != 0) || in_array('administrator', array_values($user->roles)) || in_array('Super admin', array_values($user->roles)))): ?>
+                    <li class="edit-btn"><a href="<?php print $pref ?>/node/<?php print ($page ? $page->nid : $doctor->nid) ?>/edit<?php if ($page): ?>?nid=<?php print $doctor->nid ?><?php endif; ?>"><?php print t('Edit'); ?></a></li>
+                <?php endif; ?>
+                <?php if ($page && (($user->uid == $doctor->uid && $user->uid != 0) || in_array('administrator', array_values($user->roles)) || in_array('Super admin', array_values($user->roles)))): ?>
+                    <li class="remove-btn"><a href="<?php print $pref ?>/node/<?php print ($page ? $page->nid : $doctor->nid) ?>/delete"><?php print t('Delete'); ?></a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+        <div class="brief-info">
+            <h2 class="name"><?php print render($name); ?></h2>
+            <ul class="hospitals">
+                <li style="font-weight: bold;"><?php print render($subject); ?></li>
+                <?php foreach($subjects as $value): ?>
+                    <li><?php print render($value); ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
         <div class="doctors-links-block">
+            <div class="position"><?php print nl2br($position['#markup']) ?></div>
             <ul class="links">
                 <li <?php if (!$page): ?>class="active" <?php endif; ?>>
                     <?php if ($page): ?>
@@ -135,7 +162,7 @@ $pref = $lang != 'en' ? "/".$lang : "";
                                 '#attributes' => array(
                                     'name' => 'keywords',
                                     'content' => $doctor->metatags[$lang]['keywords']['value'],
-                            ));
+                                ));
                             drupal_add_html_head($system_meta2, 'my_meta');
                         }
 
@@ -146,7 +173,7 @@ $pref = $lang != 'en' ? "/".$lang : "";
                                 '#attributes' => array(
                                     'name' => 'description',
                                     'content' => $doctor->metatags[$lang]['description']['value'],
-                            ));
+                                ));
                             drupal_add_html_head($system_meta1, 'my_meta1');
                         } ?>
                         <?php print t('Curriculum Vitae'); ?>
@@ -202,36 +229,12 @@ $pref = $lang != 'en' ? "/".$lang : "";
                 <?php endif; ?>
             </ul>
 
-        </div>
-        <div class="left-column-single-doctors">
-            <div class="doctor-img-wrap">
-                <a class="lightbox" rel="lightbox" href="<?php print file_create_url(isset($doctor->field_ph['und']) ? $doctor->field_ph['und'][0]['uri'] : ''); ?>">
-                    <?php print theme('image_style', $image); ?>
-                </a>
-            </div>
-            <ul class="editing-nav">
-                <?php if ( (($user->uid == $doctor->uid && $user->uid != 0) || in_array('administrator', array_values($user->roles)) || in_array('Super admin', array_values($user->roles)))): ?>
-                    <li class="edit-btn"><a href="<?php print $pref ?>/node/<?php print ($page ? $page->nid : $doctor->nid) ?>/edit<?php if ($page): ?>?nid=<?php print $doctor->nid ?><?php endif; ?>"><?php print t('Edit'); ?></a></li>
-                <?php endif; ?>
-                <?php if ($page && (($user->uid == $doctor->uid && $user->uid != 0) || in_array('administrator', array_values($user->roles)) || in_array('Super admin', array_values($user->roles)))): ?>
-                    <li class="remove-btn"><a href="<?php print $pref ?>/node/<?php print ($page ? $page->nid : $doctor->nid) ?>/delete"><?php print t('Delete'); ?></a></li>
-                <?php endif; ?>
-            </ul>
-        </div>
-        <div class="brief-info">
-            <h2 class="name"><?php print render($name); ?></h2>
-            
-            <div class="position"><?php print nl2br($position['#markup']) ?></div>
-            <ul class="hospitals">
-                <li style="font-weight: bold;"><?php print render($subject); ?></li>
-                <?php foreach($subjects as $value): ?>
-                    <li><?php print render($value); ?></li>
-                <?php endforeach; ?>
-            </ul>
+            <div class="email"><a href="mailto:<?php print render($email); ?>"><?php print render($email); ?></a></div>
+
         </div>
 
     </div>
-    <div class="email"><a href="mailto:<?php print render($email); ?>"><?php print render($email); ?></a></div>
+
 
     <div class="main-content">
         <?php if($page): ?>

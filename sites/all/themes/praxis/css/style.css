@@ -119,7 +119,7 @@ div.meta,
 p.comment-time,
 table,
 .breadcrumb {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Open Sans, sans-serif;
 }
 input,
 textarea,
@@ -1045,6 +1045,17 @@ div.messages {
   margin: 8px 15px;
 }
 
+div.error, .error
+{
+    background-image: none;
+    background-color: #ffe6e6;
+    border-color: #999;
+    color: #636363;
+    margin-left: 0;
+    margin-top: 12px;
+    padding-left: 30px;
+}
+
 /* -------------- Breadcrumbs   -------------- */
 
 .breadcrumb {
@@ -1084,17 +1095,16 @@ div.password-confirm {
 
 input.form-submit,
 a.button {
-  background-color: #20409a;
+  background-color: #00518f;
   color: #FFF;
   cursor: pointer;
   font-size: 16px;
   font-weight: normal;
   text-align: center;
-  margin: 56px 0 0;
+  margin: 63px 0 0;
   margin-right: 0.6em; /* LTR */
-  padding: 0 22px;
+  padding: 0 5px;
   height: 33px;
-  line-height: 33px;
   border:none;
   display: inline-block;
   width: 100%;
@@ -1675,16 +1685,18 @@ div.admin-panel .description {
 #block-loger-loger-block h2,
 #block-views-specialties-view-block h2,
 #block-mailchimp-signup-subscribe-to-newsletter h2,
-#block-mailchimp-signup-home-subscribe-to-newsletter h2{
-    background-size: 329px 61px;
-    height: 61px;
-    width: 329px;
+#block-mailchimp-signup-home-subscribe-to-newsletter h2,
+#block-views-block-news-block h2{
+    background-size: 313px 61px;
+    height: 46px;
+    width: 331px;
     background: url("../images/widget_bg_left.png") no-repeat scroll 0 0 / 331px 61px rgba(0, 0, 0, 0);
-    margin: 0 0 0 -25px;
+    margin: 0 0 0 -24px;
     color: #FFFFFF;
     padding-left: 27px;
     padding-top: 16px;
-    font-size: 19px;
+    font-size: 16px;
+    font-weight: normal;
 }
 #block-mailchimp-signup-subscribe-to-newsletter h2,
 #block-loger-loger-block h2 {
@@ -1694,7 +1706,9 @@ div.admin-panel .description {
 #block-loger-loger-block,
 #block-views-specialties-view-block,
 #block-mailchimp-signup-subscribe-to-newsletter,
-#block-mailchimp-signup-home-subscribe-to-newsletter{
+#block-mailchimp-signup-home-subscribe-to-newsletter,
+#block-views-block-news-block,
+#block-block-4{
     overflow: visible;
     clear: both;
 }
@@ -1712,7 +1726,8 @@ div.admin-panel .description {
 #block-loger-loger-block .content,
 #block-views-specialties-view-block .content,
 #block-mailchimp-signup-subscribe-to-newsletter .content,
-#block-mailchimp-signup-home-subscribe-to-newsletter .content{
+#block-mailchimp-signup-home-subscribe-to-newsletter .content,
+#block-views-block-news-block .content{
     overflow: hidden;
 }
 
